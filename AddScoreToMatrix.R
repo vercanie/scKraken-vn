@@ -1,13 +1,11 @@
-
 library(dplyr)
 library(readr)
 library(stringr)
 
- matrix_all <- read_table2("matrix.txt", col_names = F)
+matrix_all <- read_table2("matrix.txt", col_names = F)
 
 ## DEF function for selecting kmers of proper species
 replace_correct3  <- function(df,i){
-     
   df[[i]]  <- if_else(mapply(grepl, paste0("^",df$X5,":"), df[[i]]), # creates TRUE/FALSE column saying whether the final species matches to the species of the k-mer
                        str_replace(df[[i]], paste0(df$X5,":"),""), # if it matches, we will keep the number of alighed k-mers
                       NA_character_) # if it doesn't match, we will change it to NA
